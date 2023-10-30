@@ -1,0 +1,73 @@
+<div class="container">
+    <h3 mat-dialog-title *ngIf="flagArtDialog == 1">Dodavanje usluge:</h3>
+    <h3 mat-dialog-title *ngIf="flagArtDialog == 2">Modifikacija usluge: {{dataUsluge.idUsluge}</h3>
+    <h3 mat-dialog-title *ngIf="flagArtDialog == 3">Brisanje usluge: {{dataUsluge.idUsluge}</h3>
+    <form class="mat-dialog-content" #formControl="ngForm">
+        <div class="form">
+            <mat-form-field>
+                <input matInput placeholder="nazivUsluge" [(ngModel)]="dataUsluge.nazivUsluge" name="nazivUsluge" [disabled]="flagArtDialog == 3"
+                    required>
+            </mat-form-field>
+        </div>
+        <div class="form">
+            <mat-form-field>
+                <input matInput placeholder="opisUsluge" [(ngModel)]="dataUsluge.opisUsluge" name="opisUsluge"
+                    [disabled]="flagArtDialog == 3" required>
+            </mat-form-field>
+        </div>
+        <div class="form">
+            <mat-form-field>
+                <input matInput [matDatepicker]="datumUgovora" placeholder="Datum ugovora"
+                    [(ngModel)]="dataUsluge.datumUgovora" name="datumUgovora" [disabled]="flagArtDialog == 3">
+                <mat-datepicker-toggle matSuffix [for]="datumUgovora"></mat-datepicker-toggle>
+                <mat-datepicker #datumUgovora></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <div class="form">
+            <mat-form-field>
+                <input matInput placeholder="provizija" [(ngModel)]="dataUsluge.provizija" name="provizija"
+                    [disabled]="flagArtDialog == 3" required>
+            </mat-form-field>
+        </div>
+        <div class="form">
+            <mat-form-field>
+                <mat-select [(ngModel)]="dataUsluge.filijala" placeholder="Filijala" name="filijala"
+                    [compareWith]="compareTo" [disabled]="flagArtDialog == 3">
+                    <mat-option *ngFor="let filijala of filijale" [value]="filijala">
+                        {{ filijala.adresaFilijale }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="form">
+            <mat-form-field>
+                <mat-select [(ngModel)]="dataUsluge.korisnik" placeholder="Korisnik" name="korisnik"
+                    [compareWith]="compareTo" [disabled]="flagArtDialog == 3">
+                    <mat-option *ngFor="let korisnik of korisnika" [value]="korisnik">
+                        {{ korisnik.imeKorisnika }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        
+        <div mat-dialog-actions>
+            <button mat-button *ngIf="flagArtDialog==1" type="submit" [mat-dialog-close]="1" (click)="add()"
+                [disabled]="!formControl.valid">
+                Sačuvaj
+            </button>
+            <button mat-button *ngIf="flagArtDialog==2" type="submit" [mat-dialog-close]="1" (click)="update()"
+                [disabled]="!formControl.valid">
+                Sačuvaj
+            </button>
+            <button mat-button *ngIf="flagArtDialog==3" type="submit" [mat-dialog-close]="1" (click)="delete()">
+                Obriši
+            </button>
+            <button mat-button (click)="cancel()">
+                Poništi
+            </button>
+        </div>
+
+    </form>
+
+</div>
+
