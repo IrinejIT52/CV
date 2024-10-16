@@ -1,3 +1,3 @@
 **DRUGI PROJEKTI**
 
-*Diskont pica: *
+*Diskont pica: https://github.com/IrinejIT52/DiskontPica*
